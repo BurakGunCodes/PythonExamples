@@ -91,7 +91,7 @@ for r in var7 :
 # Dizidir. Veri ekleme çıkarma sıra değiştirme yapılabilir.
 # [] arasına veriler koyulur.
 
-var6 = [1, 3, 5, 7, 9, 'burakgün', 13]
+var6 = [1, 3, 5, 7, 9, 'burakgün', 13, [23,24]]
 
 for k in var6 :
     print(f' k = {k}')
