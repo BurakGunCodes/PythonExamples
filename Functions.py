@@ -4,6 +4,7 @@
 
 # fonksiyonun geri dönüş (return) değeri yok ise, NONE döndürür
 
+
 # temel anlamda fonksiyon tanımlanması
 def function(n):
     print(n)
@@ -45,4 +46,5 @@ print(var4)
 # Asal sayı bulma örnek fonksiyonu
 
 # belirlenecek
+
 
