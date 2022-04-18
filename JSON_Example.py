@@ -2,6 +2,8 @@
 # Burak GÜN 
 # burak.gun@hotmail.com
 
+# https://www.tutorialguruji.com/python/python-prettytable-add-ljust/
+
 """
 import json
 
