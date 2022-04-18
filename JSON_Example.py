@@ -34,11 +34,22 @@ for i in data_x['text']:
 """
 
 import json
+from prettytable import PrettyTable
+
+#table = PrettyTable(['Title', 'Price'])
+table = PrettyTable()
+table.field_names = ['Title', 'Price']
 
 file = open('Books.json',)
+
+# load  -- json file
+# loads -- string
 
 data = json.load(file)
 
 data2 = data['books']
 for i in data2:
-    print(i['title'])
+    table.add_row([ i['title'], i['price'] ]  )
+
+print(table)
+    #print(i['title'], i['price'])
