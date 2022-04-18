@@ -40,18 +40,27 @@ from prettytable import PrettyTable
 
 #table = PrettyTable(['Title', 'Price'])
 table = PrettyTable()
-table.field_names = ['Title', 'Price']
+table.field_names = ['Title', 'Price', 'Empty']
 
 file = open('Books.json',)
+data = json.load(file)
+
+
+widget_file = open('screen.json')
+data_widget = json.load(widget_file,)
+
+print(type(data_widget['widget']), ' ' , type(data['books']))
 
 # load  -- json file
 # loads -- string
 
-data = json.load(file)
+
 
 data2 = data['books']
 for i in data2:
-    table.add_row([ i['title'], i['price'] ]  )
+    table.add_row( [ i['title'], i['price'] ,type(data) ]  )
 
 print(table)
     #print(i['title'], i['price'])
+
+

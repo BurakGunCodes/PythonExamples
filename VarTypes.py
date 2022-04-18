@@ -77,6 +77,7 @@ print(type(var4))
 #--------------------------------------------------- Sequence Type ---------------------------------------------------------#
 
 #Python da 4 adet built-in veri tipi vardır:
+
 # 1- Tuple
 # Sıralama değiştirilemez, veri eklenip çıkartılamaz. 
 # () arasına veriler koyulur. 
@@ -102,7 +103,7 @@ for k in var6 :
 # {} arasına koyulur
 
 xy = { 'bir': 1, 'iki': 2, 'üç': 3, 'dört':4 }
-for k,v in xy.items():
+for k, v in xy.items():
     print(f'key = {k}, value = {v}')
 
 
