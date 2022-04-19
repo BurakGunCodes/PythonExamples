@@ -5,18 +5,29 @@
 
 
 
+
 import mysql.connector
 from mysql.connector import Error
-import pandas as pd
+import json
 
-#user name burak
-#user pass burak
-#host name '127.'
+# import pandas as pd
+
+
+# create server connection
+# create database
+# create database connection
+# create querries to define and manipulate (execute and then commit to database)
+# close database
+
+# Important Note
+# Ctrl + L : Clear mysql shell screen
+# Clean command history : \history clear
 
 
 def create_server_connection(host_name, user_name, user_password):
     connection = None
     try:
+        
         connection = mysql.connector.connect(
             host=host_name,
             user=user_name,
@@ -41,8 +52,15 @@ def create_database(connection, query):
     except Error as err:
         print(f"Error: '{err}'")
 
+# check if database is exist
+# select * from information_schema.schemata  ;
+# SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'database name' ;
+# SELECT IF(SCHEMA_NAME = 'school', 1 ,0) FROM INFORMATION_SCHEMA.SCHEMATA ;
+
+
 
 create_database_query = "CREATE DATABASE school"
+
 create_database(connection, create_database_query)
 
 def execute_query(connection, query):
@@ -76,32 +94,58 @@ def create_db_connection(host_name, user_name, user_password, db_name):
 
 
 create_teacher_table = """
-IF NOT EXIST
 CREATE TABLE teacher (
   teacher_id INT PRIMARY KEY,
   first_name VARCHAR(40) NOT NULL,
   last_name VARCHAR(40) NOT NULL,
-  language_1 VARCHAR(3) NOT NULL,
+  language_1 VARCHAR(3) ,
   language_2 VARCHAR(3),
   dob DATE,
   tax_id INT UNIQUE,
   phone_no VARCHAR(20)
   );
  """
+
 db_name = 'school' 
+
 connection = create_db_connection("localhost", "root", pw, db_name) # Connect to the Database
 execute_query(connection, create_teacher_table) # Execute our defined query
 
 
 pop_teacher = """
+
 INSERT INTO teacher VALUES
 (1,  'James', 'Smith', 'ENG', NULL, '1985-04-20', 12345, '+491774553676'),
 (2, 'Stefanie',  'Martin',  'FRA', NULL,  '1970-02-17', 23456, '+491234567890'), 
 (3, 'Steve', 'Wang',  'MAN', 'ENG', '1990-11-12', 34567, '+447840921333'),
 (4, 'Friederike',  'Müller-Rossi', 'DEU', 'ITA', '1987-07-07',  45678, '+492345678901'),
-(5, 'Isobel', 'Ivanova', 'RUS', 'ENG', '1963-05-30',  56789, '+491772635467'),
+(55, 'Isobel', 'Ivanova', 'RUS', 'ENG', '1963-05-30',  56789, '+491772635467'),
 (6, 'Niamh', 'Murphy', 'ENG', 'IRI', '1995-09-08',  67890, '+491231231232');
 """
 
 connection = create_db_connection("localhost", "root", pw, db_name)
 execute_query(connection, pop_teacher)
+
+
+
+
+file = open('Books.json',)
+data = json.load(file)
+
+
+
+
+data2 = data['books']
+for i in data2:
+   print(i['title'])
+
+
+
+
+add_new_values = "INSERT INTO teacher VALUES( %d, %s, %s, %s, %s, %s, %d, %d )"
+var = (25,'clear', 'vision', NULL,NULL,NULL,7777777,9999);
+
+
+
+connection = create_db_connection("localhost", "root", pw, db_name)
+execute_query(connection, add_new_values)
