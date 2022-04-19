@@ -88,15 +88,15 @@ CREATE TABLE names (
 connection = create_db_connection("localhost", "root", 'burak', 'json2sql') # Connect to the Database
 execute_query(connection, create_table) # Execute our defined query
 
-isim = "burak"
+
 
 # sql = 'INSERT INTO names(id, id2, name) VALUES({}, {}, {})'.format(126,3, "haci") 
 # sql = """INSERT INTO names VALUES(1,  2 , {isim});""".format("ahmet")
 # print(sql)
 
+isim = 'burak'
 
-sql = "INSERT INTO names(id, id2, name) VALUES(%d, %d, %s)"
-val = (45, 999, "burakgun")
+sql = f'INSERT INTO names VALUES({123}, {123}, {isim})'
 
 connection = create_db_connection("localhost", "root", 'burak', 'json2sql') # Connect to the Database
-execute_valued_query(sql, val)
+execute_query(connection, sql) # Execute our defined query
