@@ -4,7 +4,8 @@
       {
         "title" : "The Cat in the Hat",
         "author" : "Dr. Seuss",
-        "price" : 6.99
+        "price" : 6.99,
+        "language" : ["TR", "ENG", "GR"]
       },
       {
         "title" : "Ender's Game",
@@ -17,4 +18,12 @@
         "price" : 9.35
       }
     ]
+
+    
   }
+
+
+
+
+
+
