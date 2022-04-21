@@ -87,7 +87,7 @@ if __name__ == "__main__":
     connection = mysql.connector.connect(**config)
     connection.autocommit = True
 
-    cursor = connection.cursor(buffered=True)
+    cursor = connection.cursor(buffered=False)
 
     #  connection_status = connect_to_database(_host, _user, _password, _database)
 
@@ -111,19 +111,26 @@ if __name__ == "__main__":
 
         query_select_all = 'SELECT * FROM teacher'
 
+                
+        # auto_increment olduğu için (mysql içerisinde tabloyu kendim öyle oluşturdum )teacher_id tekrardan girmedik.
+
         query_insert = (
-            "INSERT INTO teacher(teacher_id, first_name, last_name ,language_1, language_2 , tax_id ,phone_no)"
-            "VALUES( %s, %s, %s, %s, %s, %s, %s)"
+            "INSERT INTO teacher( first_name, last_name ,language_1, language_2 , tax_id ,phone_no)"
+            "VALUES(%s, %s, %s, %s, %s, %s)"
          )
         
-        insert_data = (44, 'nix', 'weat', 'ENG', 'TR', 789, '+41232')
+        insert_data = ('nix', 'weat', 'ENG', 'TR', 462, '+41232')
 
         #-----------ÇOK ÖNEMLİ NOT---------#
         # INSERT, DELETE, and UPDATE ifadelerinden sonra commit kullanmak zorundasın (autocommit yapmadıysan)
         # connection = mysql.connector.connect(**config)
         # connection.autocommit = True
 
-        cursor.execute(query_insert,insert_data)
+        try:
+            cursor.execute(query_insert,insert_data)
+        except Error as err:
+            print(f"Insert Error: '{err}'") 
+
         # connection.commit()
 
         # to retrieve data from Tuple Tuple[a:b]
@@ -133,6 +140,15 @@ if __name__ == "__main__":
             # print(x[0:3])
             # print( "id:{}  ".format(x) )
         
+
+
+        qer = 'DELETE FROM teacher WHERE first_name = "nix"'
+        qer2 = 'INSERT INTO teacher(firs_name, last_name) VALUES( %s, %s )'.format('hakan', 'kemal')
+        cursor.execute(qer)
+
+        for result  in cursor:
+            print(result)
+
         # print( query[4] )
         
         # for x in  range ( len(query) ):
@@ -144,17 +160,29 @@ if __name__ == "__main__":
 
 
             
-        cursor.execute(query_select_all, params=None, multi=False)
+        # cursor.execute(query_select_all, params=None, multi=False)
 
-        # # # to retrieve data from Tuple Tuple[a:b]
-        for x  in cursor:
-            print(x)
-            # print(x[0:3])
-            # print( "id:{}  ".format(x) )
+        # # # # to retrieve data from Tuple Tuple[a:b]
+        # for x  in cursor:
+        #     print(x)
+        #     # print(x[0:3])
+        #     # print( "id:{}  ".format(x) )
    
         
 
-    
+    #------------------------------------------Notes-Summary------------------------------------------#
+
+    # TypeError: 'NoneType' object is not subscriptable hatası aldığımda,     
+    # cursor = connection.cursor(buffered=False) içerisinde ki buffered değerini False  yaptım
+
+    # SQL özelliği olarak , veri tabanında hangi verileri eklemek istiyorsan insert into table_name(var1, var2) içerisindeki
+    # var1,var2 .. kısmını doldur.
+
+            
+    # auto_increment olduğu için (mysql içerisinde tabloyu kendim öyle oluşturdum )teacher_id tekrardan girmedik.
+
+    # buffered=True önerilmez diye okudum.
+
 
   
 
