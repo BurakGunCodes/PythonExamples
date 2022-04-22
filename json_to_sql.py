@@ -64,13 +64,6 @@ def execute_query(connection, query):
     except Error as err:
         print(f"Error: '{err}'")  
 
-    
-
-
-    
-    
-
-
 
 
 
@@ -119,10 +112,11 @@ if __name__ == "__main__":
             "VALUES(%s, %s, %s, %s, %s, %s)"
          )
         
-        insert_data = ('nix', 'weat', 'ENG', 'TR', 462, '+41232')
+        insert_data = ('Burak', 'Gun', 'ENG', 'TR', 630, '+905342260')
 
         #-----------ÇOK ÖNEMLİ NOT---------#
         # INSERT, DELETE, and UPDATE ifadelerinden sonra commit kullanmak zorundasın (autocommit yapmadıysan)
+        # aşağıda nasıl yapılacağı gösteriliyor.
         # connection = mysql.connector.connect(**config)
         # connection.autocommit = True
 
@@ -143,7 +137,7 @@ if __name__ == "__main__":
 
 
         qer = 'DELETE FROM teacher WHERE first_name = "nix"'
-        qer2 = 'INSERT INTO teacher(firs_name, last_name) VALUES( %s, %s )'.format('hakan', 'kemal')
+        qer2 = 'INSERT INTO teacher(first_name, last_name) VALUES( %s, %s )'.format('hakan', 'kemal')
         cursor.execute(qer)
 
         for result  in cursor:
@@ -184,11 +178,45 @@ if __name__ == "__main__":
     # buffered=True önerilmez diye okudum.
 
 
+    #     config = {
+    #     'host'     : 'localhost',
+    #     'user'     : 'root',
+    #     'password' : 'burak',
+    #     'database' : 'school'}
+
   
+    # 1 - Bağlantı oluştur
 
+    # connection = mysql.connector.connect(**config)
+    # connection.autocommit = True
 
+    # cursor = connection.cursor(buffered=False)
         
+    # 2 - Query yaz    
+    # query_insert = (
+    #         "INSERT INTO teacher( first_name, last_name ,language_1, language_2 , tax_id ,phone_no)"
+    #         "VALUES(%s, %s, %s, %s, %s, %s)"
+    # )
         
+    # insert_data = ('Burak', 'Gun', 'ENG', 'TR', 630, '+905342260')
 
+    # 3 - Yazılan Query'yi çalıştır
 
+    # try:
+    #     cursor.execute(query_insert,insert_data)
+    # except Error as err:
+    #     print(f"Insert Error: '{err}'") 
 
+    # 4 - Eğer autocommit değil ise değişiklikleri veritabanında yapmak için commit fonksiyonunu kullan
+
+    # # connection.commit()
+
+    # # to retrieve data from Tuple Tuple[a:b]
+
+    # 5 - Sonuçları görmek için 
+    
+    # for result  in cursor:
+    #     print(result)
+    #     # print(x[0:3])
+    #     # print( "id:{}  ".format(x) )
+        
